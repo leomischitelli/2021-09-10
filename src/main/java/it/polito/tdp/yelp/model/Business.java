@@ -1,109 +1,55 @@
 package it.polito.tdp.yelp.model;
 
-public class Business {
+import com.javadocmd.simplelatlng.LatLng;
+
+public class Business implements Comparable<Business>{
 	private String businessId;
-	private String fullAddress;
-	private String active;
-	private String categories;
-	private String city;
-	private int reviewCount;
 	private String businessName;
-	private String neighborhoods;
-	private double latitude;
-	private double longitude;
-	private String state;
+	private String city;
 	private double stars;
+	private LatLng coordinate;
 	
 	
-	public Business(String businessId, String fullAddress, String active, String categories, String city, int reviewCount,
-			String businessName, String neighborhoods, double latitude, double longitude, String state, double stars) {
+	public Business(String businessId, String businessName, String city, double stars, double latitude, double longitude) {
 		super();
 		this.businessId = businessId;
-		this.fullAddress = fullAddress;
-		this.active = active;
-		this.categories = categories;
-		this.city = city;
-		this.reviewCount = reviewCount;
 		this.businessName = businessName;
-		this.neighborhoods = neighborhoods;
-		this.latitude = latitude;
-		this.longitude = longitude;
-		this.state = state;
+		this.city = city;
 		this.stars = stars;
+		this.coordinate = new LatLng(latitude, longitude);
 	}
 	
+	
+
 	public String getBusinessId() {
 		return businessId;
 	}
-	public void setBusinessId(String businessId) {
-		this.businessId = businessId;
-	}
-	public String getFullAddress() {
-		return fullAddress;
-	}
-	public void setFullAddress(String fullAddress) {
-		this.fullAddress = fullAddress;
-	}
-	public String getActive() {
-		return active;
-	}
-	public void setActive(String active) {
-		this.active = active;
-	}
-	public String getCategories() {
-		return categories;
-	}
-	public void setCategories(String categories) {
-		this.categories = categories;
-	}
+
+
+
 	public String getCity() {
 		return city;
 	}
-	public void setCity(String city) {
-		this.city = city;
-	}
-	public int getReviewCount() {
-		return reviewCount;
-	}
-	public void setReviewCount(int reviewCount) {
-		this.reviewCount = reviewCount;
-	}
+
+
+
 	public String getBusinessName() {
 		return businessName;
 	}
-	public void setBusinessName(String businessName) {
-		this.businessName = businessName;
-	}
-	public String getNeighborhoods() {
-		return neighborhoods;
-	}
-	public void setNeighborhoods(String neighborhoods) {
-		this.neighborhoods = neighborhoods;
-	}
-	public double getLatitude() {
-		return latitude;
-	}
-	public void setLatitude(double latitude) {
-		this.latitude = latitude;
-	}
-	public double getLongitude() {
-		return longitude;
-	}
-	public void setLongitude(double longitude) {
-		this.longitude = longitude;
-	}
-	public String getState() {
-		return state;
-	}
-	public void setState(String state) {
-		this.state = state;
-	}
+
+
+
 	public double getStars() {
 		return stars;
 	}
-	public void setStars(double stars) {
-		this.stars = stars;
+
+
+
+	public LatLng getCoordinate() {
+		return coordinate;
 	}
+
+
 
 	@Override
 	public int hashCode() {
@@ -128,6 +74,21 @@ public class Business {
 		} else if (!businessId.equals(other.businessId))
 			return false;
 		return true;
+	}
+
+
+
+	@Override
+	public String toString() {
+		return businessName;
+	}
+
+
+
+	@Override
+	public int compareTo(Business o) {
+		// TODO Auto-generated method stub
+		return this.businessId.compareTo(o.getBusinessId());
 	}
 
 
