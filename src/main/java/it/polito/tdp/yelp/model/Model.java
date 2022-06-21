@@ -70,8 +70,8 @@ public class Model {
 		setDepurato.remove(b1);
 		setDepurato.remove(b2); //lo aggiungero alla fine
 		
-		setAttuale.add(b1);
-		cerca(setAttuale, setDepurato, soglia);
+		this.setMigliore.add(b1);
+		cerca(setDepurato, soglia);
 		this.setMigliore.add(b2);
 		
 		return setMigliore;
@@ -79,21 +79,12 @@ public class Model {
 	
 	
 	
-	private void cerca(Set<Business> setAttuale, Set<Business> setDepurato, Double soglia) {
-		//genero solo soluzioni valide
-		if(setAttuale.size() > this.setMigliore.size()) {
-			this.setMigliore = new LinkedHashSet<>(setAttuale);
-		}
-		
+	private void cerca (Set<Business> setDepurato, Double soglia) {
+		//topologia full mesh, da ogni vertice posso raggiungere gli altri. Non ho vincoli sulla distanza.
+		//scansiono tutto una sola volta
 		for(Business b : setDepurato) {
-			if( /* !setAttuale.contains(b) && */ b.getStars() > soglia) {
-				//alleggerisco set ricorsivo, evitando il contains
-				Set<Business> depuratoRicorsivo = new HashSet<>(setDepurato);
-				depuratoRicorsivo.remove(b);
-				//aggiungo, esploro e rimuovo
-				setAttuale.add(b);
-				cerca(setAttuale, depuratoRicorsivo, soglia);
-				setAttuale.remove(b);
+			if(b.getStars() > soglia) {
+				this.setMigliore.add(b);
 			}
 		}
 		
